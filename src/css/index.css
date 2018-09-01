@@ -1,0 +1,281 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+/* 
+* 每组扑克的右边距为6 
+* 每组扑克中间的缝隙为83
+* 每张扑克宽160高240
+*/
+/* 背景图片 */
+.main {
+  position: relative;
+  margin-top: 20px;
+}
+.main-item {
+  position: absolute;
+}
+.BgImg {
+  background: url('../image/pkp.png') no-repeat;
+}
+/* 红桃2 */
+.Hearts2 {
+  background-position-x: 0px;
+}
+/* 方片2 */
+.Diamonds2 {
+  background-position-x: -166px;
+}
+/* 梅花 2*/
+.Clubs2 {
+  background-position-x: -332px;
+}
+/* 黑桃2 */
+.Spades2 {
+  background-position-x: -498px;
+}
+/* 红桃3 */
+.Hearts3 {
+  background-position-x: -741px;
+}
+/* 方片3 */
+.Diamonds3 {
+  background-position-x: -907px;
+}
+/* 梅花 3*/
+.Clubs3 {
+  background-position-x: -1073px;
+}
+/* 黑桃3 */
+.Spades3 {
+  background-position-x: -1239px;
+}
+/* 红桃4 */
+.Hearts4 {
+  background-position-x: 0px;
+  background-position-y: -243px;
+}
+/* 方片4 */
+.Diamonds4 {
+  background-position-x: -166px;
+  background-position-y: -243px;
+}
+/* 梅花4*/
+.Clubs4 {
+  background-position-x: -332px;
+  background-position-y: -243px;
+}
+/* 黑桃4 */
+.Spades4 {
+  background-position-x: -498px;
+  background-position-y: -243px;
+}
+/* 红桃5 */
+.Hearts5 {
+  background-position-x: -741px;
+  background-position-y: -243px;
+}
+/* 方片5 */
+.Diamonds5 {
+  background-position-x: -907px;
+  background-position-y: -243px;
+}
+/* 梅花5*/
+.Clubs5 {
+  background-position-x: -1073px;
+  background-position-y: -243px;
+}
+/* 黑桃5 */
+.Spades5 {
+  background-position-x: -1239px;
+  background-position-y: -243px;
+}
+
+/* 红桃6 */
+.Hearts6 {
+  background-position-x: 0px;
+  background-position-y: -484px;
+}
+/* 方片6 */
+.Diamonds6 {
+  background-position-x: -166px;
+  background-position-y: -484px;
+}
+/* 梅花 6*/
+.Clubs6 {
+  background-position-x: -332px;
+  background-position-y: -484px;
+}
+/* 黑桃6 */
+.Spades6 {
+  background-position-x: -498px;
+  background-position-y: -484px;
+}
+
+/* 红桃7 */
+.Hearts7 {
+  background-position-x: -741px;
+  background-position-y: -484px;
+}
+/* 方片7 */
+.Diamonds7 {
+  background-position-x: -907px;
+  background-position-y: -484px;
+}
+/* 梅花7*/
+.Clubs7 {
+  background-position-x: -1073px;
+  background-position-y: -484px;
+}
+/* 黑桃7 */
+.Spades7 {
+  background-position-x: -1239px;
+  background-position-y: -484px;
+}
+
+/* 红桃8 */
+.Hearts8 {
+  background-position-x: 0px;
+  background-position-y: -724px;
+}
+/* 方片8 */
+.Diamonds8 {
+  background-position-x: -166px;
+  background-position-y: -724px;
+}
+/* 梅花8*/
+.Clubs8 {
+  background-position-x: -332px;
+  background-position-y: -724px;
+}
+/* 黑桃8 */
+.Spades8 {
+  background-position-x: -498px;
+  background-position-y: -724px;
+}
+
+/* 红桃9 */
+.Hearts9 {
+  background-position-x: -741px;
+  background-position-y: -724px;
+}
+/* 方片9 */
+.Diamonds9 {
+  background-position-x: -907px;
+  background-position-y: -724px;
+}
+/* 梅花9*/
+.Clubs9 {
+  background-position-x: -1073px;
+  background-position-y: -724px;
+}
+/* 黑桃9 */
+.Spades9 {
+  background-position-x: -1239px;
+  background-position-y: -724px;
+}
+
+/* 红桃10 */
+.Hearts10 {
+  background-position-x: 0px;
+  background-position-y: -964px;
+}
+/* 方片10 */
+.Diamonds10 {
+  background-position-x: -166px;
+  background-position-y: -964px;
+}
+/* 梅花10*/
+.Clubs10 {
+  background-position-x: -332px;
+  background-position-y: -964px;
+}
+/* 黑桃10 */
+.Spades10 {
+  background-position-x: -498px;
+  background-position-y: -964px;
+}
+
+/* 红桃11 */
+.Hearts11 {
+  background-position-x: -741px;
+  background-position-y: -964px;
+}
+/* 方片11 */
+.Diamonds11 {
+  background-position-x: -907px;
+  background-position-y: -964px;
+}
+/* 梅花11*/
+.Clubs11 {
+  background-position-x: -1073px;
+  background-position-y: -964px;
+}
+/* 黑桃11 */
+.Spades11 {
+  background-position-x: -1239px;
+  background-position-y: -964px;
+}
+
+/* 红桃12 */
+.Hearts12 {
+  background-position-x: 0px;
+  background-position-y: -1206px;
+}
+/* 方片12 */
+.Diamonds12 {
+  background-position-x: -166px;
+  background-position-y: -1206px;
+}
+/* 梅花12*/
+.Clubs12 {
+  background-position-x: -332px;
+  background-position-y: -1206px;
+}
+/* 黑桃12 */
+.Spades12 {
+  background-position-x: -498px;
+  background-position-y: -1206px;
+}
+
+/* 红桃13 */
+.Hearts13 {
+  background-position-x: -741px;
+  background-position-y: -1206px;
+}
+/* 方片13 */
+.Diamonds13 {
+  background-position-x: -907px;
+  background-position-y: -1206px;
+}
+/* 梅花13*/
+.Clubs13 {
+  background-position-x: -1073px;
+  background-position-y: -1206px;
+}
+/* 黑桃13 */
+.Spades13 {
+  background-position-x: -1239px;
+  background-position-y: -1206px;
+}
+
+/* 红桃14 */
+.Hearts14 {
+  background-position-x: 0px;
+  background-position-y: -1466px;
+}
+/* 方片14 */
+.Diamonds14 {
+  background-position-x: -172px;
+  background-position-y: -1466px;
+}
+/* 梅花14*/
+.Clubs14 {
+  background-position-x: -1068px;
+  background-position-y: -1466px;
+}
+/* 黑桃14 */
+.Spades14 {
+  background-position-x: -1239px;
+  background-position-y: -1466px;
+}

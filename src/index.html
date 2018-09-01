@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="./css/index.css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <input type="text" id="dom_val" /><button>开始</button> -->
+  <div class="main" id="main">
+  </div>
+</body>
+<script type="text/javascript">
+  window.onload = function () {
+    // 闭包练习
+    // function p_method(val) {
+    //   let local_val = "abc"
+    //   function c_method() {
+    //     return local_val += val
+    //   }
+    //   return c_method
+    // }
+    // let btn = document.getElementsByTagName("button")
+    // btn[0].addEventListener("click", function (event) {
+    //   let dom_val = document.getElementById("dom_val").value
+    //   let fun_val = p_method(dom_val)()
+    //   console.log(fun_val)
+    // }, false)
+    // 闭包测试
+    // function constfunc() {
+    //   var funcs = []
+    //   for (var i = 0; i < 10; i++) {
+    //     // console.log(i)
+    //     funcs[i] = function () { return i }
+    //   }
+    //   return funcs
+    // }
+    // var funcs = constfunc()
+    // // console.log(funcs)
+    // console.log(funcs[1]())
+    // arguments练习
+    // function check(args) {
+    //   var actual = args.length;
+    //   var expectd = args.callee.length
+    //   console.log(actual)
+    //   console.log(expectd)
+    // }
+    // function f(x, y, z) {
+    //   check(arguments)
+    // }
+    // f(1, 2)
+    // call和apply
+    // let arr_data = { 0: 1, 1: 2, length: 2 }
+    // let j_data = Array.prototype.join.call(arr_data, '_')
+    // console.log('call in data:', j_data)
+    // let a_data = Array.prototype.join.apply(arr_data, ['%'])
+    // console.log('apply in data', a_data)
+    // 不完全函数
+    // function array(a, n) {
+    //   console.log('array prototype:', Array.prototype.slice)
+    //   console.log('a prototype :', a)
+    //   return Array.prototype.slice.call(a, n || 0)
+    // }
+    // function partialLeft(f) {
+    //   var args = arguments;
+    //   return function () {
+    //     var a = array(args, 1)
+    //     console.log('a for Object', a)
+    //     console.log('arguments', arguments)
+    //     console.log('a for arguments', (array(arguments)))
+    //     a = a.concat(array(arguments))
+    //     return f.apply(this, a)
+    //   }
+    // }
+    // function partial() {
+    //   var args = arguments
+    //   return function () {
+    //     console.log('args is', args)
+    //     var a = array(args, 1)
+    //     console.log('a is', a)
+    //     var i = 0; j = 0;
+    //     for (; i < a.length; i++) {
+    //       console.log('j number is：', j)
+    //       if (a[i] === undefined) {
+    //         a[i] = arguments[j++];
+    //       }
+    //     }
+    //     a = a.concat(array(arguments, j))
+    //     return f.apply(this, a);
+    //   }
+    // }
+    // var f = function (x, y, z) { return x * (y + z) }
+    // // console.log(partialLeft(f, 1)(2, 3))
+    // console.log('partial', partial(f, undefined, undefined, 2)(2, 3))
+    // // 记忆
+    // function memorize(f) {
+    //   var cache = {};
+    //   console.log('记忆', cache)
+    //   return function () {
+    //     var key = arguments.length + Array.prototype.join.call(arguments, ",");
+    //     console.log(key)
+    //     if (key in cache) {
+    //       return cache[key]
+    //     } else {
+    //       return cache[key] = f.apply(this, arguments)
+    //     }
+    //   }
+    // }
+    // var factorial = memorize(function (n) {
+    //   return (n <= 1) ? 1 : n * factorial(n - 1)
+    // })
+    // console.log(factorial(5))
+    // js 面向对象(集合类)
+    // function Set() {
+    //   this.values = {}
+    //   this.n = 0
+    //   this.add.apply(this, arguments)
+    // }
+    // Set.prototype.add = function () {
+    //   debugger
+    //   for (let i = 0; i < arguments.length; i++) {
+    //     let val = arguments[i]
+    //     let str = Set._v2s(val)
+    //     if (!this.values[str] || !this.values[str].hasOwnProperty(str)) {
+    //       this.values[str] = val
+    //       this.n++
+    //     }
+    //   }
+    //   return this
+    // }
+    // Set.prototype.remove = function () {
+    //   for (let i = 0; i < arguments.length; i++) {
+    //     let str = Set._v2s(arguments[i])
+    //     if (this.values.hasOwnProperty(str)) {
+    //       delete this.values[str]
+    //       this.n--
+    //     }
+    //   }
+    //   return this
+    // }
+    // Set.prototype.contains = function (value) {
+    //   return this.values.hasOwnProperty(Set._v2s(value))
+    // }
+    // Set.prototype.size = function () {
+    //   return this.n
+    // }
+    // Set.prototype.foreach = function (f, context) {
+    //   for (let s in this.values) {
+    //     if (this.values.hasOwnProperty(s))
+    //       f.call(context, this.values[s])
+    //   }
+    // }
+    // Set._v2s = function (val) {
+    //   switch (val) {
+    //     case undefined: return 'u'
+    //     case null: return 'n'
+    //     case true: return 't'
+    //     case false: return 'f'
+    //     default: switch (typeof val) {
+    //       case 'number': return '#' + val
+    //       case 'string': return '"' + val
+    //       default: return '@' + ObjectId(val)
+    //     }
+    //   }
+    //   function ObjectId(o) {
+    //     var prop = "|**objectid**|"
+    //     if (!o.hasOwnProperty(prop)) {
+    //       o[prop] = Set._v2s.next++
+    //     }
+    //     return o[prop]
+    //   }
+    // }
+    // Set._v2s.next = 100
+    // let setObj = new Set(1, 2, 3, 4, 5, 6)
+    // console.log('set:', setObj)
+    // setObj.remove(1, 5)
+    // console.log('set:', setObj)
+    // js 面向对象（枚举类型）
+    function enumeration(namesToValues) {
+      let enumeration = function () { throw "Cat't Instatite Enumeratios" }
+      let proto = enumeration.prototype = {
+        constructor: enumeration,
+        toString: function () { return this.name },
+        valueOf: function () { return this.value },
+        toJSON: function () { return this.name }
+      }
+      enumeration.values = []
+      for (name in namesToValues) {
+        let e = inherit(proto)
+        e.name = name
+        e.value = namesToValues[name]
+        enumeration[name] = e
+        enumeration.values.push(e)
+      }
+      enumeration.foreach = function (f, c) {
+        for (let i = 0; i < this.values.length; i++) {
+          f.call(c, this.values[i])
+        }
+      }
+      return enumeration
+    }
+    function inherit(p) {
+      if (p == null) throw TypeError()
+      if (Object.create) {
+        return Object.create(p)
+      }
+      var t = typeof p
+      if (t !== "object" && t !== "function")
+        throw TypeError()
+      function f() { }
+      f.prototype = p
+      return new f()
+    }
+    function Card(suit, rank) {
+      this.suit = suit
+      this.rank = rank
+    }
+    Card.prototype.toString = function () {
+      return this.rank.toString() + " of " + this.suit.toString()
+    }
+    Card.prototype.compareTo = function () {
+      if (this.rank < this.suit) return -1
+      if (this.rank > this.suit) return 1
+      return 0
+    }
+    // 使用枚举定义花色点数和枚举类型
+    Card.suit = enumeration({ Clubs: 1, Diamonds: 2, Hearts: 3, Spades: 4 })
+    Card.rank = enumeration({ Two: 2, Three: 3, Four: 4, Five: 5, Six: 6, Seven: 7, Eight: 8, Nine: 9, Ten: 10, Jack: 11, Queen: 12, King: 13, Ace: 14 })
+    Card.orderByRank = function (a, b) { return a.compareTo(b) }
+    Card.orderBySuit = function (a, b) {
+      if (a.suit < b.suit) return -1
+      if (a.suit > b.suit) return 1
+      if (a.rank < b.rank) return -1
+      if (a.rank > b.rank) return 1
+      return 0
+    }
+    // 初始化52张牌
+    function Deck() {
+      let cards = this.cards = []
+      Card.suit.foreach(function (s) {
+        Card.rank.foreach(function (r) { cards.push(new Card(s, r)) })
+      })
+    }
+    // 洗牌
+    Deck.prototype.shuffle = function () {
+      let deck = this.cards, len = deck.length
+      for (let i = len - 1; i > 0; i--) {
+        let r = Math.floor(Math.random() * (i + 1)), temp
+        temp = deck[i], deck[i] = deck[r], deck[r] = temp
+      }
+      return this
+    }
+    // 发牌
+    Deck.prototype.deal = function (n) {
+      if (this.cards.length < n) throw "Out of cards"
+      return this.cards.splice(this.cards.length - n, n)
+    }
+    function initCard() {
+      // 得到main对象
+      this.main = document.getElementById('main')
+      // 初始化扑克牌
+      let deck = (new Deck()).shuffle(); // 洗牌
+      let hand = deck.deal(13).sort(Card.orderBySuit); // 发牌13张
+      console.log('deck', deck)
+      console.log('hand', hand)
+      return function () {
+        let _r_num = _t_top = 0;
+        for (let i = 0; i < hand.length; i++) {
+          let playCard = document.createElement("div")
+          // let cardData = document.createTextNode(hand[i].rank.value)
+          playCard.className = hand[i].suit.name + hand[i].rank.value + ' BgImg main-item';
+          playCard.style = `width:160px; height:240px; float:left; left:${_r_num += 35}px; top:${_t_top += 3}px;`
+          // playCard.appendChild(cardData)
+          main.appendChild(playCard)
+        }
+      }
+    }
+    initCard()()
+  }
+</script>
+
+</html>
