@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  window.onload = function () {
+    function BaseObj(item, data) {
+      this.item = item
+      this.data = data
+      this.baseName = '父类属性'
+      this.funBase = function () {
+        return '父类方法'
+      }
+    }
+    BaseObj.prototype = {
+      constructor: BaseObj,
+      show: function () {
+        return '父类原型方法' + this.item + '' + this.data
+      }
+    }
+    let baseObj = new BaseObj(1, 2)
+    // console.log(baseObj.show())
+    // console.log(baseObj.item)
+    // 原型继承：不能实现多继承、不能为父类构造函数传递参数、要想添加子类的属性，必须在new之后添加、引用属性是所有实例共享的
+    function ChildObj() { }
+    ChildObj.prototype = new BaseObj(1, 2)
+    ChildObj.prototype.name = '张三'
+    ChildObj.prototype.sex = '男'
+    ChildObj.prototype.childName = '原型继承'
+
+    let childObj = new ChildObj()
+
+    // 构造函数继承：只能继承父类的属性和方法无法继承原型方法、为子类创建了父类的属性副本，效率不高
+    function ChildConstructor() {
+      BaseObj.call(this, 1, 2)
+      this.test = "test"
+      this.childName = '构造函数继承'
+    }
+    // 实例继承：不支持多继承，父类的实例不是子类的实例
+    function ChildLivingExample() {
+      let livingExample = new BaseObj(11, 22)
+      livingExample.name = '实例继承'
+      return livingExample
+    }
+    // 拷贝继承：效率底下，内存暂用率比较高、无法获取父类不可枚举的方法
+    function CopyInherit() {
+      let baseData = new BaseObj(222, 333)
+      for (let p in baseData) {
+        CopyInherit.prototype[p] = baseData[p]
+      }
+      CopyInherit.prototype.childName = '拷贝继承'
+    }
+    // 组合继承：
+    function CombinationInherit() {
+      BaseObj.call(this)
+      this.childName = '组合继承'
+    }
+    CombinationInherit.prototype = new BaseObj(1111, 2222)
+    CombinationInherit.prototype.constructor = CombinationInherit
+    // 寄生组合继承
+    function ParasitetsmInherit() {
+      BaseObj.call(this)
+      ParasitetsmInherit.prototype.childName = '寄生组合继承'
+    }
+    (function () {
+      let Super = function () { }
+      Super.prototype = BaseObj.prototype
+      ParasitetsmInherit.prototype = new Super()
+    })()
+    ParasitetsmInherit.prototype.constructor = ParasitetsmInherit
+    console.log('父类', baseObj)
+    console.log('原型继承的方式继承父类', childObj)
+    // childObj.baseName = 'test edit basename'
+    // console.log('父类属性baseName被修改为:', childObj.baseName)
+    // console.log('原父类属性baseName为:', baseObj.baseName)
+    console.log('构造函数继承的方式继承父类', new ChildConstructor())
+    console.log('实例继承的方式继承父类', new ChildLivingExample())
+    console.log('拷贝继承的方式继承父类', new CopyInherit())
+    console.log('组合继承的方式继承父类', new CombinationInherit())
+    console.log('寄生组合的方式继承父类', new ParasitetsmInherit())
+
+    // function Person() {
+
+    // }
+    // Person.prototype = {
+    //   constructor: Person,
+    //   name: "张三",
+    //   age: 21,
+    //   job: "teacher",
+    //   getName: function () {
+    //     return this.name;
+    //   },
+    //   getJob: function () {
+    //     return this.job;
+    //   }
+    // }
+
+    // var p = new Person();
+    // console.log(p.getName()); //张三
+    // console.log(p.getJob()); //teacher
+    // var p2 = new Person();
+    // p2.name = "李四";
+    // console.log(p2.getName()); //李四
+  }
+</script>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  window.onload = function () {
+    function extend(o, p) {
+      for (prop in p) {
+        o[prop] = p[prop]
+      }
+      return o
+    }
+    function abstractmethod() { throw new Error("abstract method") }
+    function AbstractSet() { throw new Error("Can't instantiate abstract classes") }
+    AbstractSet.prototype.contains = abstractmethods
+    let NotSet = AbstractSet.extend(function NotSet(set) { this.set = set }, {
+      contains: function (x) { return !this.set.contains(x) },
+      toString: function (x) { return '~' + this.set.toString() },
+      equals: function (that) { return that instanceof NotSet && this.set.equals(that.setssss) }
+    })
+    let AbstractEnumrableSet = AbstractSet.extend(function () { throw new Error("Can't instantiate abstract classes") }, {
+      size: abstractmethod,
+      foreach: abstractmethod,
+      isEmpty: function () { return this.size() == 0 },
+      toString: function () {
+        let s = "{", i = 0;
+        this.foreach(function (v) {
+          if (i++ > 0) s += ",";
+          s += vs
+        });
+        return s + "}"
+      },
+      toLocalString: function () {
+        let s = "{", i = 0;
+        this.foreach(function (v) {
+          if (i++ > 0) s += ","
+          if (v == null) s += v;
+          else s += v.toLocalString()
+        })
+        return s + "}"
+      },
+      toArray: function () {
+        let a = []
+        this.foreach(function (v) { a.push(v) })
+        return a;
+      },
+      equals: function (that) {
+
+      }
+    })
+  }
+</script>
+
+</html>
