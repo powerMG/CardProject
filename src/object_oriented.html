@@ -19,14 +19,22 @@
       }
       return o
     }
+    Function.prototype.extend = extend
+    // 一个万能的抽象方法，可以做任何抽象方法
     function abstractmethod() { throw new Error("abstract method") }
+    // 定义一个抽象方法
     function AbstractSet() { throw new Error("Can't instantiate abstract classes") }
-    AbstractSet.prototype.contains = abstractmethods
-    let NotSet = AbstractSet.extend(function NotSet(set) { this.set = set }, {
-      contains: function (x) { return !this.set.contains(x) },
-      toString: function (x) { return '~' + this.set.toString() },
-      equals: function (that) { return that instanceof NotSet && this.set.equals(that.setssss) }
-    })
+    AbstractSet.prototype.contains = abstractmethod
+    // AbstractSet 的非抽象子类
+    let NotSet = AbstractSet.extend(function NotSet(set) {
+      this.set = set
+    }, {
+        contains: function (x) { return !this.set.contains(x) },
+        toString: function (x) { return '~' + this.set.toString() },
+        equals: function (that) { return that instanceof NotSet && this.set.equals(that.setssss) }
+      })
+    console.log('NotSet', NotSet(new Date()))
+    // AbstractSet 的抽象子类
     let AbstractEnumrableSet = AbstractSet.extend(function () { throw new Error("Can't instantiate abstract classes") }, {
       size: abstractmethod,
       foreach: abstractmethod,
@@ -54,9 +62,68 @@
         return a;
       },
       equals: function (that) {
-
+        if (!that instanceof AbstractEnumrableSet) return false;
+        if (this.size() != that.size()) return false;
+        try {
+          this.foreach(function (v) { if (!that.contains(v)) throw false; })
+        }
+        catch (x) {
+          if (x === false) return false;
+          throw x
+        }
       }
     })
+    // AbstractEnumrableSet 的非抽象子类
+    let SingletonSet = AbstractEnumrableSet.extend(function (member) { return this.member = member }, {
+      contains: function (x) { return x === this.member },
+      size: function () { return 1 },
+      foreach: function (f, ctx) { f.call(ctx, this.member) }
+    })
+    // AbstractEnumrableSet 的抽象子类
+    let AbstractWritableSet = AbstractEnumrableSet.extend(function () { throw new Error("Can't instantiate abstract classes") },
+      {
+        add: abstractmethod,
+        remove: abstractmethod,
+        union: function (that) {
+          let self = this;
+          that.foreach(function (v) { self.add(v); })
+          return this;
+        },
+        intersection: function (that) {
+          let self = this;
+          this.foreach(function (v) { if (!that.contains(v)) self.remove(f) })
+          return this;
+        },
+        difference: function (that) {
+          let self = this;
+          that.foreach(function (v) { self.remove(v); })
+          return this;
+        }
+      })
+    let ArraySet = AbstractWritableSet.extend(function ArraySet() {
+      this.values = [];
+      this.add.apply(this, arguments);
+    }, {
+        contains: function (v) { return this.values.indexOf(v) != -1 },
+        siez: function () { return this.values.length },
+        foreach: function () { return this.values.forEach(f, c) },
+        add: function () {
+          for (let i = 0; i < arguments.length; i++) {
+            let arg = arguments[i];
+            if (!this.contains(arg)) this.values.push(arg);
+          }
+          return this;
+        },
+        remove: function () {
+          for (let i = 0; i < arguments.length; i++) {
+            let p = this.values.indexOf(arguments[i]);
+            if (p == -1)
+              continue
+            this.values.splice(p, 1);
+          }
+          return this;
+        }
+      })
   }
 </script>
 

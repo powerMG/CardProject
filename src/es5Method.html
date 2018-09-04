@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  (function () {
+    Object.defineProperty(Object.prototype, "objectId", {
+      get: idGetter,
+      enumerable: false,
+      configurable: false
+    })
+    function idGetter() {
+      if (!(idProp in this)) {
+        if (!Object.isExtensible(this)) throw new Error("Can't define id for nonextensible objects")
+        Object.defineProperty(this, idProp, {
+          value: nextid++,
+          writable: false,
+          enumerable: false,
+          configurable: false
+        })
+      }
+      return this[idProp]
+    }
+    let idProp = ""
+    let nextid = 1
+  }())
+  window.onload = function () {
+    // 定义不可变的类
+    // function Range(from, to) {
+    //   let props = {
+    //     from: { value: from, enumerable: true, writable: false, configurable: false },
+    //     to: { value: to, enumerable: true, writable: false, configurable: false }
+    //   };
+    //   if (this instanceof Range) Object.defineProperties(Range.prototype, {
+    //     includes: {
+    //       value: function (x) { return this.from <= x && X <= this.to }
+    //     },
+    //     foreach: {
+    //       value: function (f) { for (let x = Math.ceil(this.from); x <= this.to; x++)f(x); }
+    //     },
+    //     toString: {
+    //       value: function () { return "(" + this.from + "……" + this.to + ")"; }
+    //     }
+    //   })
+    // }
+    // 重写上述方法
+    function freezeProps(o) {
+      let props = (arguments.length == 1) ? Object.getOwnPropertyNames(o) : Array.prototype.splice.call(arguments, 1)
+      props.forEach(function (n) {
+        if (!Object.getOwnPropertyDescriptor(o, n).configurable) return false;
+        Object.defineProperty(o, n, { writable: false, configurable: false });
+      })
+      return o;
+    }
+    function hideProps(o) {
+      let props = (arguments.length == 1) ? Object.getOwnPropertyNames(o) : Array.prototype.splice.call(arguments, 1);
+      props.forEach(function (v) {
+        if (!Object.getOwnPropertyDescriptor(o, v).configurable) return false;
+        Object.defineProperty(o, v, { enumerable: false })
+      })
+    }
+    function Range(from, to) {
+      this.from = from;
+      this.to = to;
+      freezeProps(this)
+    }
+    Range.prototype = hideProps({
+      constructor: Range,
+      include: function (x) { return this.from <= x && x <= this.to },
+      foreach: function (f) {
+        for (let x = Math.ceil(this.from); x <= this.to; x++)
+          f(x)
+      },
+      toString: function () { return "(" + this.from + "……" + this.to + ")"; }
+
+    })
+  }
+</script>
+
+</html>
