@@ -52,6 +52,7 @@
     //     }
     //   })
     // }
+    /*use strcit*/
     // 重写上述方法
     function freezeProps(o) {
       let props = (arguments.length == 1) ? Object.getOwnPropertyNames(o) : Array.prototype.splice.call(arguments, 1)
@@ -71,7 +72,7 @@
     function Range(from, to) {
       this.from = from;
       this.to = to;
-      freezeProps(this)
+      return freezeProps(this)
     }
     Range.prototype = hideProps({
       constructor: Range,
@@ -80,9 +81,49 @@
         for (let x = Math.ceil(this.from); x <= this.to; x++)
           f(x)
       },
-      toString: function () { return "(" + this.from + "……" + this.to + ")"; }
-
+      toString: function () {
+        debugger
+        return "(" + this.from + "……" + this.to + ")";
+      }
     })
+    // test
+    let Set = function (n) {
+      this.values = [];
+      this.n = n;
+      this.foreach = function () {
+        for (let i = 0; i < n; i++) {
+          this.values.push(i)
+        }
+      }
+    }
+    let privateSet = (function PSet() {
+      let values = [];
+      let n;
+      let obj = {}
+      this.foreach = function (n, obj) {
+        this.n = n
+        for (let i = 0; i < n; i++) {
+          values.push(i)
+        }
+        for (let item in obj) {
+          this.obj[`${item}`] = obj[`${item}`]
+        }
+      };
+      return {
+        values: values,
+        foreach: foreach,
+        obj: obj
+      }
+    }())
+    let temp = new Set(4)
+    console.log(temp.values.join())
+    temp.foreach()
+    console.log(temp.values.join())
+    console.log(temp.n)
+    privateSet.foreach(5, { a: 1, b: 2 })
+    console.log(privateSet.values.join())
+    console.log(privateSet.n)
+    console.log(privateSet.obj)
   }
 </script>
 
