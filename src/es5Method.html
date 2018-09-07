@@ -115,15 +115,26 @@
         obj: obj
       }
     }())
-    let temp = new Set(4)
-    console.log(temp.values.join())
-    temp.foreach()
-    console.log(temp.values.join())
-    console.log(temp.n)
-    privateSet.foreach(5, { a: 1, b: 2 })
-    console.log(privateSet.values.join())
-    console.log(privateSet.n)
-    console.log(privateSet.obj)
+    // let temp = new Set(4)
+    // console.log(temp.values.join())
+    // temp.foreach()
+    // console.log(temp.values.join())
+    // console.log(temp.n)
+    // privateSet.foreach(5, { a: 1, b: 2 })
+    // console.log(privateSet.values.join())
+    // console.log(privateSet.n)
+    // console.log(privateSet.obj)
+    let collections;
+    if (!collections) collections = {}
+    collections.sets = (new function namespace() {
+      this.AbstractSet = function () {
+        return 1
+      }
+      this.NotSet = function () {
+        return 23
+      }
+    }())
+    console.log(collections)
   }
 </script>
 
